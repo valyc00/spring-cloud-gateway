@@ -1,0 +1,19 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pres="http://telecomitalia.it/ec/presentation">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pres:estrattoConto>
+         <!--Optional:-->
+         <ecRequest>
+            <clientID>11</clientID>
+            <codiceOperazione>?</codiceOperazione>
+            <MSISDN>?</MSISDN>
+            <profonditaRichiesta>?</profonditaRichiesta>
+            <!--Optional:-->
+          
+            <groupedDescriptionID>?</groupedDescriptionID>
+            <!--Optional:-->
+            <option>?</option>
+         </ecRequest>
+      </pres:estrattoConto>
+   </soapenv:Body>
+</soapenv:Envelope>

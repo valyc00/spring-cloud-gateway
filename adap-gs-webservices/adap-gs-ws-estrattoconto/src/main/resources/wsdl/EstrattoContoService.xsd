@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 4 U (http://www.xmlspy.com) by Paolo Sacchetto (IT TELECOM OSS & VAS Solutions) -->
+<xsd:schema targetNamespace="http://telecomitalia.it/ec/presentation" xmlns:ns0="http://telecomitalia.it/ec/presentation" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	<xsd:element name="estrattoConto" type="ns0:estrattoConto"/>
+	<xsd:element name="errorResponse" type="ns0:errorResponseType"/>
+	<xsd:element name="clientID" type="ns0:clientIDType"/>
+	<xsd:element name="eventCdC" type="ns0:eventCdCType"/>
+	<xsd:element name="esito" type="ns0:esitoType"/>
+	<xsd:element name="estrattoContoResponse" type="ns0:estrattoContoResponse"/>
+	<xsd:element name="ecResponse" type="ns0:ecResponseType"/>
+	<xsd:element name="ecRequest" type="ns0:ecRequestType"/>
+	<xsd:element name="eventCrBonus1" type="ns0:eventCrBonus1Type"/>
+	<xsd:simpleType name="clientIDType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="APP"/>
+			<xsd:enumeration value="CC"/>
+			<xsd:enumeration value="MSITE"/>
+			<xsd:enumeration value="WEB"/>
+			<xsd:enumeration value="IVR"/>
+			<xsd:enumeration value="DBSS_SL"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="esitoType">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="OK"/>
+			<xsd:enumeration value="ERROR"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="estrattoConto">
+		<xsd:sequence>
+			<xsd:element name="ecRequest" type="ns0:ecRequestType" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eventCdCType">
+		<xsd:sequence>
+			<xsd:element name="MSISDN" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="operationDateTime" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="operationCost" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="paymentType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="paymentMethod" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="categoryID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="categoryDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ecEventID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="defaultDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="detailedDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="filler" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="offerName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="activationDateTime" type="xsd:dateTime" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="errorResponseType">
+		<xsd:sequence>
+			<xsd:element name="errorCode" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="errorDescription" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="eventCrBonus1Type">
+		<xsd:sequence>
+			<xsd:element name="MSISDN" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="operationDateTime" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="operationCost" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="paymentType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="paymentMethod" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="categoryID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="categoryDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="ecEventID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="defaultDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="detailedDescription" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="filler" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="debit" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="bonus1" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="bonusAScadenza" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="oldDebit" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="oldBonus1" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="bonusAScadenzaOld" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="subsys" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="subject" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="mode" type="xsd:int" minOccurs="0"/>
+			<xsd:element name="basketName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="serviceID" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="fee" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="advancePayment" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="descriptionFee" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="descriptionAdvancePayment" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="MSISDNDonor" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="MSISDNReceiver" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="offerName" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="expectedCost" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="renewalType" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="cart" type="xsd:boolean" minOccurs="0"/>
+			<xsd:element name="oldOffer" type="xsd:string" minOccurs="0"/>
+			<xsd:element name="feeComp" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="advancePaymentComp" type="xsd:decimal" minOccurs="0"/>
+			<xsd:element name="sosFullComp" type="xsd:decimal" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="estrattoContoResponse">
+		<xsd:sequence>
+			<xsd:element name="ecResponse" type="ns0:ecResponseType" form="qualified" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ecResponseType">
+		<xsd:sequence>
+			<xsd:element name="esito" type="ns0:esitoType"/>
+			<xsd:element name="errorResponse" type="ns0:errorResponseType" minOccurs="0"/>
+			<xsd:element name="eventCdCNumber" type="xsd:int"/>
+			<xsd:element name="eventCrBonus1Number" type="xsd:int"/>
+			<xsd:element name="eventCdCList" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="eventCdC" type="ns0:eventCdCType" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="eventCrBonus1List" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="eventCrBonus1" type="ns0:eventCrBonus1Type" minOccurs="0" maxOccurs="unbounded"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="ecRequestType">
+		<xsd:sequence>
+			<xsd:element name="clientID" type="ns0:clientIDType"/>
+			<xsd:element name="codiceOperazione" type="xsd:string"/>
+			<xsd:element name="MSISDN" type="xsd:string"/>
+			<xsd:element name="profonditaRichiesta" type="xsd:string"/>
+			<xsd:element name="dataDa" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="dataA" type="xsd:dateTime" minOccurs="0"/>
+			<xsd:element name="groupedDescriptionID" type="xsd:string"/>
+			<xsd:element name="option" type="xsd:string" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+</xsd:schema>

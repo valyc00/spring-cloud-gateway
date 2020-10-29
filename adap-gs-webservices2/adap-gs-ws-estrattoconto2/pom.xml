@@ -1,0 +1,260 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>it.eng.t2lab.adap.gatesender</groupId>
+		<artifactId>adap-gs-webservices</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>adap-gs-ws-estrattoconto2</artifactId>
+	<packaging>war</packaging>
+	<properties>
+		<cxf.version>3.3.2</cxf.version>
+		<java.version>1.8</java.version>
+	</properties>
+	<!-- <parent> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-parent</artifactId> 
+		<version>2.0.3.RELEASE</version> <relativePath /> lookup parent from repository 
+		</parent> -->
+	<dependencies>
+
+		<!-- <dependency> <groupId>it.eng.gatesender.ws</groupId> <artifactId>adap-gs-ws-estrattoconto-jaxws</artifactId> 
+			<version>1.0.0</version> </dependency> -->
+
+
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+
+			<exclusions>
+				<exclusion>
+					<groupId>org.apache.tomcat.embed</groupId>
+					<artifactId>tomcat-embed-websocket</artifactId>
+				</exclusion>
+			</exclusions>
+
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-spring-boot-starter-jaxws</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http-jetty</artifactId>
+			<version>${cxf.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-features-logging</artifactId>
+			<version>${cxf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+
+		</dependency>
+
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+
+		</dependency>
+
+	</dependencies>
+
+	<scm>
+		<connection>scm:svn:http://127.0.0.1/dummy</connection>
+		<developerConnection>scm:svn:https://127.0.0.1/dummy</developerConnection>
+		<tag>HEAD</tag>
+		<url>http://127.0.0.1/dummy</url>
+	</scm>
+
+
+	<build>
+		<plugins>
+			<!-- COMMENTARE PER GENERARE WAR E CAMBIARE PACKAGING DA JAR IN WAR -->
+			<!-- <plugin> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId> 
+				<configuration> <layout>ZIP</layout> excludes per JAR esterno <excludes> 
+				<exclude> <groupId>it.eng</groupId> <artifactId>crs-test-ext</artifactId> 
+				</exclude> </excludes> </configuration> <executions> <execution> <goals> 
+				<goal>repackage</goal> </goals> </execution> </executions> </plugin> -->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<doCheck>false</doCheck>
+					<doUpdate>false</doUpdate>
+					<revisionOnScmFailure>unknownbuild</revisionOnScmFailure>
+					<providerImplementations>
+						<svn>javasvn</svn>
+					</providerImplementations>
+					<format>{0,date,yyyyMMddHHmmss}</format>
+					<items>
+						<item>timestamp</item>
+					</items>
+				</configuration>
+			</plugin>
+
+
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>wsimport-from-jdk</id>
+						<goals>
+							<goal>wsimport</goal>
+						</goals>
+						<configuration>
+							<executable>${tool.wsimport}</executable>
+							<!-- <wsdlDirectory>src/mywsdls</wsdlDirectory> -->
+							<wsdlDirectory>${basedir}/src/main/resources/wsdl</wsdlDirectory>
+							<!-- <wsdlFiles> <wsdlFile>GinoCrsGatewayServices_v1.wsdl</wsdlFile> 
+								</wsdlFiles> -->
+							<verbose>true</verbose>
+							<xdebug>true</xdebug>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<wsdlDirectory>src/main/resources/wsdl</wsdlDirectory>
+					<sourceDestDir>${basedir}/generated/src/main/java</sourceDestDir>
+					<!-- <bindingFiles> <bindingFile>${basedir}/src/main/resources/jaxb-bindings.xml</bindingFile> 
+						</bindingFiles> -->
+				</configuration>
+			</plugin>
+
+
+
+				<!-- 
+			<plugin>
+				<groupId>org.apache.cxf</groupId>
+				<artifactId>cxf-codegen-plugin</artifactId>
+				<version>${cxf.version}</version>
+				<executions>
+					<execution>
+						<id>generate-sources</id>
+						<phase>generate-sources</phase>
+						<configuration>
+							<sourceRoot>${basedir}/src/generated/java</sourceRoot>
+							<wsdlOptions>
+								<wsdlOption>
+									<wsdl>${basedir}/src/main/resources/wsdl/EstrattoContoService.wsdl</wsdl>
+								</wsdlOption>
+							</wsdlOptions>
+						</configuration>
+						<goals>
+							<goal>wsdl2java</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+					 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<archive>
+						<manifestEntries>
+							<WebLogic-Application-Version>${project.version}_${buildNumber}</WebLogic-Application-Version>
+							<Implementation-Build>${buildNumber}</Implementation-Build>
+						</manifestEntries>
+						<manifest>
+							<addDefaultImplementationEntries>false</addDefaultImplementationEntries>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+			
+	
+
+		</plugins>
+	</build>
+
+
+
+	<profiles>
+		<profile>
+			<id>win</id>
+			<activation>
+				<os>
+					<family>windows</family>
+				</os>
+			</activation>
+			<properties>
+				<tool.wsgen>${java.home}/../bin/wsgen.exe</tool.wsgen>
+				<tool.wsimport>${java.home}/../bin/wsimport.exe</tool.wsimport>
+			</properties>
+		</profile>
+		<profile>
+			<id>nix</id>
+			<activation>
+				<os>
+					<family>!windows</family>
+				</os>
+			</activation>
+			<properties>
+				<tool.wsgen>${java.home}/../bin/wsgen</tool.wsgen>
+				<tool.wsimport>${java.home}/../bin/wsimport</tool.wsimport>
+			</properties>
+		</profile>
+	</profiles>
+
+
+
+
+
+
+
+</project>
